@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CadastroContato.Data;
+using CadastroContato.Repositorio;
 using DotNetEnv;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,7 +36,7 @@ namespace CadastroContato {
             string connectionString = Env.GetString("DB_CONNECTION_STRING");
 
             services.AddEntityFrameworkSqlServer().AddDbContext<BancoContext>(options => options.UseSqlServer(connectionString));
-
+            services.AddScoped<IContatoRepositorio, ContatoRepositorio>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
