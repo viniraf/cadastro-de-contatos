@@ -1,20 +1,24 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+## Informações 
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+* Esse é um projeto feito para treinar minhas habilidades com .NET e Entity Framework
+* O projeto é um CRUD web de contatos, conectado com banco de dados;
+* A página possui tanto a parte visual quanto a parte funcional.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## Tecnologias utilizadas
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+* Visual Studio e SQL Server Management Studio;
+* Frameworks: .NET Core, Razor e Bootstrap;
+* Linguagens: C#, HTML, CSS, JavaScript, SQL.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## Conhecimentos utilizados 
+
+* Conceito de Model View e Controller como padrão de projeto.
+* Formulários, botões e tabelas HTML com dados vindos do banco de dados;
+* Entity Framework para transformar e enviar os dados digitados para o banco de dados;
+* Classes e estilização com bootstrap;
+
+
+## Considerações
+
+* Esse projeto foi construído utilizando uma vídeo aula no youtube como inspiração;
+* Créditos ao [Canal Programador Tech](https://www.youtube.com/c/ProgramadorTech).
