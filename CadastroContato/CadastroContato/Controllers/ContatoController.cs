@@ -28,17 +28,37 @@ namespace CadastroContato.Controllers {
         [HttpPost]
         public IActionResult Create(ContatoModel contato) {
             _contatoRepositorio.Create(contato);
+
+
             return RedirectToAction("Index");
         }
 
 
-        public IActionResult Update() {
-            return View();
+        public IActionResult Update(int id) {
+            ContatoModel contato = _contatoRepositorio.GetInfosById(id);
+
+            return View(contato);
         }
 
-        public IActionResult DeleteConfirmation() {
-            return View();
+        [HttpPost]
+        public IActionResult Update(ContatoModel contato) {
+            _contatoRepositorio.Update(contato);
+
+            return RedirectToAction("Index");
         }
+
+        public IActionResult DeleteConfirmation(int id) {
+            ContatoModel contato = _contatoRepositorio.GetInfosById(id);
+            return View(contato);
+        }
+
+        public IActionResult Delete(int id) {
+
+            _contatoRepositorio.Delete(id);
+
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

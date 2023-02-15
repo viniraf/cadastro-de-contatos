@@ -10,5 +10,11 @@ namespace CadastroContato.Repositorio {
         ContatoModel Create(ContatoModel contato);
 
         List<ContatoModel> GetAll();
+
+        ContatoModel GetInfosById(int id);
+
+        ContatoModel Update(ContatoModel contato);
+
+        bool Delete(int id);
     }
 }
