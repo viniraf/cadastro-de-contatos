@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CadastroContato.Data;
+using DotNetEnv;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,6 +27,14 @@ namespace CadastroContato {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            // Load the environment variables from the .env file
+            Env.Load();
+
+            // Get the database connection string from the .env file
+            string connectionString = Env.GetString("DB_CONNECTION_STRING");
+
+            services.AddEntityFrameworkSqlServer().AddDbContext<BancoContext>(options => options.UseSqlServer(connectionString));
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
