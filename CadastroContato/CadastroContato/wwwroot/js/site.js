@@ -5,8 +5,13 @@
 
 
 $(document).ready(function () {
-    $('#table-contatos').DataTable();
+    getDataTable('#table-usuarios');
+    getDataTable('#table-contatos');
 });
+
+function getDataTable(id) {
+    $(id).DataTable();
+}
 
 // Popup message auto fadeout
 $('.alert').fadeIn().delay(2000).fadeOut(function () {
