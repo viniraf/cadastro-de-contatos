@@ -12,7 +12,21 @@
         <h1 class="display-4">Listagem de contatos</h1>
     </div>
 
+
+    @if (TempData["MensagemSucesso"] != null) {
+    <div class="alert alert-success text-center" role="alert">
+        @TempData["MensagemSucesso"]
+    </div>
+}
+
+@if (TempData["MensagemErro"] != null) {
+    <div class="alert alert-danger" role="alert">
+        @TempData["MensagemErro"]
+    </div>
+}
+
     <br />
+
     <div>
         <a class="btn btn-info" role="button" asp-controller="Contato" asp-action="Create">Adicionar novo contato</a>
     </div>
