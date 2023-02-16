@@ -3,6 +3,11 @@
 
 // Write your JavaScript code.
 
+
+$(document).ready(function () {
+    $('#table-contatos').DataTable();
+});
+
 // Popup message auto fadeout
 $('.alert').fadeIn().delay(2000).fadeOut(function () {
     $(this).remove()
