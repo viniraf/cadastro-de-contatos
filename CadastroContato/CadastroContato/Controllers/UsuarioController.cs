@@ -33,6 +33,7 @@ namespace CadastroContato.Controllers
 
             try {
                 if (ModelState.IsValid) {
+
                     _usuarioRepositorio.Create(usuario);
                     TempData["MensagemSucesso"] = "Usuario cadastrado com sucesso!";
                     return RedirectToAction("Index");
@@ -42,10 +43,78 @@ namespace CadastroContato.Controllers
                 return View(usuario);
             }
             catch (Exception error) {
+
                 TempData["MensagemErro"] = $"Ops, não foi possível cadastrar seu usuario, tente novamente! Detalhe do erro: {error.Message}";
                 return RedirectToAction("Index");
             }
 
+        }
+
+        public IActionResult Update(int id) {
+
+            UsuarioModel usuario = _usuarioRepositorio.GetInfosById(id);
+
+            return View(usuario);
+        }
+
+        [HttpPost]
+        public IActionResult Update(UsuarioSemSenhaModel usuarioSemSenha) {
+
+            try {
+                UsuarioModel usuario = null;
+
+                if (ModelState.IsValid) {
+
+                    usuario = new UsuarioModel() {
+
+                        Id = usuarioSemSenha.Id,
+                        Nome = usuarioSemSenha.Nome,
+                        Login = usuarioSemSenha.Login,
+                        Email = usuarioSemSenha.Email,
+                        Perfil = usuarioSemSenha.Perfil
+                    };
+
+                    usuario = _usuarioRepositorio.Update(usuario);
+                    TempData["MensagemSucesso"] = "Usuário atualizado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+
+                return View(usuario);
+            }
+            catch (Exception error) {
+
+                TempData["MensagemErro"] = $"Ops, não foi possível atualizar seu usuário , tente novamente! Detalhe do erro: {error.Message}";
+                return RedirectToAction("Index");
+            }
+
+
+        }
+
+        public IActionResult DeleteConfirmation(int id) {
+
+            UsuarioModel usuario = _usuarioRepositorio.GetInfosById(id);
+            return View(usuario);
+        }
+
+        public IActionResult Delete(int id) {
+
+            try {
+                bool deleted = _usuarioRepositorio.Delete(id);
+
+                if (deleted) {
+                    TempData["MensagemSucesso"] = "Usuário apagado com sucesso!";
+                }
+                else {
+                    TempData["MensagemErro"] = "Ops, não foi possível apagar seu usuário";
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception error) {
+
+                TempData["MensagemErro"] = $"Ops, não foi possível apagar seu usuário, tente novamente! Detalhe do erro: {error.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
     }

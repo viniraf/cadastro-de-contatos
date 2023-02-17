@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace CadastroContato.Models {
-    public class UsuarioModel {
+    public class UsuarioSemSenhaModel {
 
         [Key]
         public int Id { get; set; }
@@ -17,18 +17,11 @@ namespace CadastroContato.Models {
         [Required(ErrorMessage = "Digite o login do usuario")]
         public String Login { get; set; }
 
-        [Required(ErrorMessage = "Digite a senha do usuario")]
-        public String Senha { get; set; }
-
         [Required(ErrorMessage = "Digite o email do usuario")]
         [EmailAddress(ErrorMessage = "Informe um e-mail válido")]
         public String Email { get; set; }
 
         [Required(ErrorMessage = "Informe o perfil do usuário")]
         public PerfilEnum? Perfil { get; set; }
-
-        public DateTime DataCadastro { get; set; }
-
-        public DateTime? DataAtualizacao { get; set; }
     }
 }
