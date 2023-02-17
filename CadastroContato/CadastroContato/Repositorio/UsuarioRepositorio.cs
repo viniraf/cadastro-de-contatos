@@ -29,6 +29,10 @@ namespace Cadastrousuario.Repositorio {
             return _context.Usuarios.ToList();
         }
 
+        public UsuarioModel GetUserByLogin(string login) {
+            return _context.Usuarios.FirstOrDefault(x => x.Login == login);
+        }
+
         public UsuarioModel GetInfosById(int id) {
 
             return _context.Usuarios.FirstOrDefault(x => x.Id == id);
@@ -63,5 +67,7 @@ namespace Cadastrousuario.Repositorio {
 
             return true;
         }
+
+        
     }
 }

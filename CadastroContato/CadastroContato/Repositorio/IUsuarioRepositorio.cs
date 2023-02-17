@@ -11,6 +11,8 @@ namespace CadastroContato.Repositorio {
 
         List<UsuarioModel> GetAll();
 
+        UsuarioModel GetUserByLogin(string login);
+
         UsuarioModel GetInfosById(int id);
 
         UsuarioModel Update(UsuarioModel contato);
