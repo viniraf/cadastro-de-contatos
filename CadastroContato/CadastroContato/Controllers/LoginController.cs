@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CadastroContato.Helper;
 using CadastroContato.Models;
 using CadastroContato.Repositorio;
 using Microsoft.AspNetCore.Mvc;
@@ -10,16 +11,29 @@ namespace CadastroContato.Controllers {
     public class LoginController : Controller {
 
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+        private readonly ISessao _sessao;
 
-        public LoginController (IUsuarioRepositorio usuarioRepositorio) {
+        public LoginController (IUsuarioRepositorio usuarioRepositorio, ISessao sessao) {
             _usuarioRepositorio = usuarioRepositorio;
+            _sessao = sessao;
         }
 
-
-
         public IActionResult Index() {
+            // Se usuario estiver logado, redireciona para home
+
+            if (_sessao.GetUserSession() != null) {
+
+                return RedirectToAction("Index", "Home");
+            }
 
             return View();
+        }
+
+        public IActionResult Exit() {
+
+            _sessao.RemoveUserSession();
+
+            return RedirectToAction("Index", "Login");
         }
 
         [HttpPost]
@@ -35,6 +49,7 @@ namespace CadastroContato.Controllers {
 
                         if (usuario.SenhaValida(loginModel.Senha)) {
 
+                            _sessao.CreateUserSession(usuario);
                             return RedirectToAction("Index", "Home");
                         }
 

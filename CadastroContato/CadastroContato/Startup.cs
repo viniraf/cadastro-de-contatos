@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CadastroContato.Data;
+using CadastroContato.Helper;
 using CadastroContato.Repositorio;
 using Cadastrousuario.Repositorio;
 using DotNetEnv;
@@ -39,7 +40,14 @@ namespace CadastroContato {
             services.AddEntityFrameworkSqlServer().AddDbContext<BancoContext>(options => options.UseSqlServer(connectionString));
             services.AddScoped<IContatoRepositorio, ContatoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<ISessao, Sessao>();
 
+            services.AddSession(option => {
+                option.Cookie.HttpOnly = true;
+                option.Cookie.IsEssential = true;
+            });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -54,6 +62,7 @@ namespace CadastroContato {
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSession();
 
             app.UseMvc(routes => {
                 routes.MapRoute(
