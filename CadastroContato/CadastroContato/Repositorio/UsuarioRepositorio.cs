@@ -19,6 +19,7 @@ namespace Cadastrousuario.Repositorio {
         public UsuarioModel Create(UsuarioModel usuario) {
 
             usuario.DataCadastro = DateTime.Now;
+            usuario.SetPasswordHash();
             _context.Usuarios.Add(usuario);
             _context.SaveChanges();
             return usuario;

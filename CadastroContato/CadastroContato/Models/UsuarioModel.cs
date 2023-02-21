@@ -1,4 +1,5 @@
 ﻿using CadastroContato.Enums;
+using CadastroContato.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,7 +33,12 @@ namespace CadastroContato.Models {
         public DateTime? DataAtualizacao { get; set; }
 
         public bool SenhaValida(string senha) {
-            return Senha == senha;
+            return Senha == senha.GerarHash();
+        }
+
+
+        public void SetPasswordHash() {
+            Senha = Senha.GerarHash();
         }
     }
 }
