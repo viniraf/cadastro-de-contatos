@@ -13,7 +13,9 @@
     <ul class="nav navbar-nav">
         <li><a asp-area="" asp-controller="Home" asp-action="Index">Página Inicial</a></li>
         <li><a asp-area="" asp-controller="Contato" asp-action="Index">Contatos</a></li>
-        <li><a asp-area="" asp-controller="Usuario" asp-action="Index">Usuarios</a></li>
+        @if (Model.Perfil == CadastroContato.Enums.PerfilEnum.Admin) {
+            <li><a asp-area="" asp-controller="Usuario" asp-action="Index">Usuarios</a></li>
+        }
         <li><a asp-area="" asp-controller="Login" asp-action="Exit">Sair</a></li>
     </ul>
 </div>

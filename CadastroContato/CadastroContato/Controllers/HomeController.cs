@@ -5,8 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CadastroContato.Models;
+using CadastroContato.Filters;
 
 namespace CadastroContato.Controllers {
+
+    [PaginaParaUsuarioLogado]
     public class HomeController : Controller {
         public IActionResult Index() {
             return View();

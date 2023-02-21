@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CadastroContato.Filters;
 using CadastroContato.Models;
 using CadastroContato.Repositorio;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CadastroContato.Controllers
-{
-    public class UsuarioController : Controller
-    {
+namespace CadastroContato.Controllers {
+
+    [PaginaRestritaSomenteAdmin]
+    public class UsuarioController : Controller {
 
         private readonly IUsuarioRepositorio _usuarioRepositorio;
 

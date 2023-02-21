@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CadastroContato.Filters;
 using CadastroContato.Models;
 using CadastroContato.Repositorio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CadastroContato.Controllers {
+
+    [PaginaParaUsuarioLogado]
     public class ContatoController : Controller {
 
         private readonly IContatoRepositorio _contatoRepositorio;
