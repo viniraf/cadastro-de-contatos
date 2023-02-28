@@ -17,6 +17,8 @@ namespace CadastroContato.Repositorio {
 
         UsuarioModel Update(UsuarioModel contato);
 
+        UsuarioModel UpdatePassword(AlterarSenhaModel alterarSenhaModel);
+
         bool Delete(int id);
     }
 }

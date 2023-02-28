@@ -57,6 +57,25 @@ namespace Cadastrousuario.Repositorio {
             return usuarioDb;
         }
 
+        public UsuarioModel UpdatePassword(AlterarSenhaModel alterarSenhaModel) {
+
+            UsuarioModel usuarioDB = GetInfosById(alterarSenhaModel.Id);
+
+            if (usuarioDB == null) throw new Exception("Houve um erro na atualização da senha, usuário não encontrado");
+
+            if (!usuarioDB.SenhaValida(alterarSenhaModel.SenhaAtual)) throw new Exception("Senha atual não confere!");
+
+            if (usuarioDB.SenhaValida(alterarSenhaModel.NovaSenha)) throw new Exception("Nova senha deve ser diferente da senha atual!");
+
+            usuarioDB.SetNewPassword(alterarSenhaModel.NovaSenha);
+            usuarioDB.DataAtualizacao = DateTime.Now;
+
+            _context.Usuarios.Update(usuarioDB);
+            _context.SaveChanges();
+
+            return usuarioDB;
+        }
+
         public bool Delete(int id) {
 
             UsuarioModel usuarioDb = GetInfosById(id);
@@ -69,6 +88,5 @@ namespace Cadastrousuario.Repositorio {
             return true;
         }
 
-        
     }
 }

@@ -16,6 +16,7 @@
         @if (Model.Perfil == CadastroContato.Enums.PerfilEnum.Admin) {
             <li><a asp-area="" asp-controller="Usuario" asp-action="Index">Usuarios</a></li>
         }
+        <li><a asp-area="" asp-controller="ALterarSenha" asp-action="Index">Alterar Senha</a></li>
         <li><a asp-area="" asp-controller="Login" asp-action="Exit">Sair</a></li>
     </ul>
 </div>

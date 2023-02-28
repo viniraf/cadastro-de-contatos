@@ -40,5 +40,10 @@ namespace CadastroContato.Models {
         public void SetPasswordHash() {
             Senha = Senha.GerarHash();
         }
+
+        public void SetNewPassword(string novaSenha) {
+
+            Senha = novaSenha.GerarHash();
+        }
     }
 }
