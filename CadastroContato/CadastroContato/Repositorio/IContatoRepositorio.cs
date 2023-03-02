@@ -9,7 +9,7 @@ namespace CadastroContato.Repositorio {
 
         ContatoModel Create(ContatoModel contato);
 
-        List<ContatoModel> GetAll();
+        List<ContatoModel> GetAll(int usuarioId);
 
         ContatoModel GetInfosById(int id);
 

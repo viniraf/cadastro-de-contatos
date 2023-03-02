@@ -22,9 +22,9 @@ namespace CadastroContato.Repositorio {
             return contato;
         }
 
-        public List<ContatoModel> GetAll() {
+        public List<ContatoModel> GetAll(int usuarioId) {
 
-            return _context.Contatos.ToList();
+            return _context.Contatos.Where(x => x.UsuarioId == usuarioId).ToList();
         }
 
         public ContatoModel GetInfosById(int id) {

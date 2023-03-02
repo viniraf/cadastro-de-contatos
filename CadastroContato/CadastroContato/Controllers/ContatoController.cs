@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CadastroContato.Filters;
+using CadastroContato.Helper;
 using CadastroContato.Models;
 using CadastroContato.Repositorio;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +14,18 @@ namespace CadastroContato.Controllers {
     public class ContatoController : Controller {
 
         private readonly IContatoRepositorio _contatoRepositorio;
-        public ContatoController(IContatoRepositorio contatoRepositorio) {
+        private readonly ISessao _sessao;
+
+
+        public ContatoController(IContatoRepositorio contatoRepositorio, ISessao sessao) {
             _contatoRepositorio = contatoRepositorio;
+            _sessao = sessao;
         }
 
         public IActionResult Index() {
 
-            List<ContatoModel> contatos = _contatoRepositorio.GetAll();
+            UsuarioModel usuarioLogado = _sessao.GetUserSession();
+            List<ContatoModel> contatos = _contatoRepositorio.GetAll(usuarioLogado.Id);
 
             return View(contatos);
         }
@@ -35,7 +41,11 @@ namespace CadastroContato.Controllers {
             {
                 if (ModelState.IsValid)
                 {
-                    _contatoRepositorio.Create(contato);
+                    UsuarioModel usuarioLogado = _sessao.GetUserSession();
+                    contato.UsuarioId = usuarioLogado.Id;
+
+                    contato =  _contatoRepositorio.Create(contato);
+
                     TempData["MensagemSucesso"] = "Contato cadastrado com sucesso!";
                     return RedirectToAction("Index");
                 }
@@ -64,12 +74,16 @@ namespace CadastroContato.Controllers {
             try {
                 if (ModelState.IsValid) {
 
-                    _contatoRepositorio.Update(contato);
+                    UsuarioModel usuarioLogado = _sessao.GetUserSession();
+                    contato.UsuarioId = usuarioLogado.Id;
+
+                    contato = _contatoRepositorio.Update(contato);
                     TempData["MensagemSucesso"] = "Contato atualizado com sucesso!";
                     return RedirectToAction("Index");
                 }
 
                 return View(contato);
+
             } catch (Exception error) {
 
                 TempData["MensagemErro"] = $"Ops, não foi possível atualizar seu contato, tente novamente! Detalhe do erro: {error.Message}";

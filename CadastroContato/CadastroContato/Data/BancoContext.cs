@@ -1,4 +1,5 @@
-﻿using CadastroContato.Models;
+﻿using CadastroContato.Data.Map;
+using CadastroContato.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,12 @@ namespace CadastroContato.Data {
         public DbSet<ContatoModel> Contatos { get; set; }
 
         public DbSet<UsuarioModel> Usuarios { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+
+            modelBuilder.ApplyConfiguration(new ContatoMap());
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
