@@ -13,10 +13,12 @@ namespace CadastroContato.Controllers {
     public class UsuarioController : Controller {
 
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+        private readonly IContatoRepositorio _contatoRepositorio;
 
-        public UsuarioController(IUsuarioRepositorio usuarioRepositorio) {
+        public UsuarioController(IUsuarioRepositorio usuarioRepositorio, IContatoRepositorio contatoRepositorio) {
 
             _usuarioRepositorio = usuarioRepositorio;
+            _contatoRepositorio = contatoRepositorio;
         }
 
         public IActionResult Index() {
@@ -49,6 +51,12 @@ namespace CadastroContato.Controllers {
                 return RedirectToAction("Index");
             }
 
+        }
+
+        public IActionResult GetContactsByUserId(int id) {
+
+            List<ContatoModel> contatos = _contatoRepositorio.GetAll(id);
+            return PartialView("_ContatosUsuario", contatos);
         }
 
         public IActionResult Update(int id) {

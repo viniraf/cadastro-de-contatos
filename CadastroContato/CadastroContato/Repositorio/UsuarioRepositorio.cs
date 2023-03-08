@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CadastroContato.Models;
 using CadastroContato.Data;
 using CadastroContato.Repositorio;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cadastrousuario.Repositorio {
     public class UsuarioRepositorio : IUsuarioRepositorio {
@@ -27,7 +28,7 @@ namespace Cadastrousuario.Repositorio {
 
         public List<UsuarioModel> GetAll() {
 
-            return _context.Usuarios.ToList();
+            return _context.Usuarios.Include(x => x.Contatos).ToList();
         }
 
         public UsuarioModel GetUserByLogin(string login) {

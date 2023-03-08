@@ -7,7 +7,22 @@
 $(document).ready(function () {
     getDataTable('#table-usuarios');
     getDataTable('#table-contatos');
-});
+
+    $('.btn-total-contatos').click(function () {
+        var usuarioId = $(this).attr('usuario-id');
+
+        $.ajax({
+            type: 'GET',
+            url: '/Usuario/GetContactsByUserId/' + usuarioId,
+            success: function (result) {
+                $('#listaContatosUsuario').html(result);
+                getDataTable('#table-contatos-usuario');
+                $('#modalContatosUsuario').modal();
+            }
+        });
+    });
+
+})
 
 function getDataTable(id) {
     $(id).DataTable();
